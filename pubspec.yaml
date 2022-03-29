@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flex_color_scheme: ^4.2.0
+  flutter_number_picker: 1.0.4
+  numberpicker: ^2.1.1
 
 
 

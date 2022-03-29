@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:practice/pages/about.dart';
 import 'package:practice/pages/start.dart';
 import 'package:practice/pages/result.dart';
+import 'package:numberpicker/numberpicker.dart';
+import 'package:practice/pages/aboutus.dart';
+import 'package:practice/pages/login.dart';
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/start',
+
+    initialRoute: '/login',
     routes: {
-      result.routeName:(context)=>const result(),
-      '/home': (context) => Home(),
+
+      '/aboutus':(context)=>AboutUs(),
       '/start':(context)=>Start(),
-      '/about': (context) => about(),
+      '/login':(context)=>LoginPage(),
     },
   ),);
   }
