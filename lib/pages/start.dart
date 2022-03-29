@@ -1,15 +1,7 @@
-
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:practice/widgets/drop.dart';
-import 'package:practice/widgets/drop2.dart';
-import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
-
-import 'package:hive/hive.dart';
-import 'package:practice/pages/result.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 class  Start extends StatefulWidget {
   const Start({Key? key}) : super(key: key);
@@ -19,10 +11,10 @@ class  Start extends StatefulWidget {
 }
 
 class start_State extends State<Start> {
-  bool value = false;
+  //bool value = false;
   Color backcolor=Color(0xff222831);
   Color boxcolor=Color(0xffEEEEEE);
-  var pwdWidgets = <Widget>[];
+
   int val = -1;
   int height=0;
   int weight=0;
@@ -88,8 +80,7 @@ class start_State extends State<Start> {
 
 
 
-  GlobalKey<Dropd> _myKey = GlobalKey();
-  GlobalKey<Dropd2> _myKey2 = GlobalKey();
+
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -445,9 +436,8 @@ class start_State extends State<Start> {
                             fontWeight: FontWeight.bold)),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        print("done");
-                        double xyz =bmi_calc();
-                        print(xyz);
+
+
                         setState(() {
 
                           bmi=bmi_calc().toStringAsFixed(2);
