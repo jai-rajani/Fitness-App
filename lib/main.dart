@@ -5,18 +5,35 @@ import 'package:practice/pages/result.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:practice/pages/aboutus.dart';
 import 'package:practice/pages/login.dart';
-void main() {
-  runApp(MaterialApp(
+import 'package:firebase_core/firebase_core.dart';
+import 'package:practice/services/authentication.dart';
+import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'package:practice/models/User1.dart';
+import 'package:practice/pages/wrapper.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
 
-    initialRoute: '/login',
+  );
+  runApp(Home());
+
+
+  /*runApp(MaterialApp(
+
+    initialRoute: '/home',
     routes: {
-
+      '/home':(context)=>Home(),
       '/aboutus':(context)=>AboutUs(),
       '/start':(context)=>Start(),
-      '/login':(context)=>LoginPage(),
+      '/login':(context)=>MainPage(),
     },
-  ),);
+  ),
+  );*/
+
   }
+
 
 
 
@@ -29,33 +46,38 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int counter =0;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('my first app'),
-        centerTitle: true,
-        backgroundColor: Colors.deepOrange,
-      ),
-      body:
-      Column(
-        children: [
-          Image.asset('assets/232672.jpg'),
-          Text('$counter'),
-        ],
+    return StreamProvider<User1?>.value(
+      catchError: (_, __) => null,
+      initialData: null,
+      value:AuthService().user,
 
-      ),
+      child: MaterialApp(
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: ()
-        {
-          Navigator.pushNamed(context, '/about');
+        //initialRoute: '/home',
+        /*routes: {
+          '/home':(context)=>Home(),
+          '/aboutus':(context)=>AboutUs(),
+          '/start':(context)=>Start(),
+          '/login':(context)=>MainPage(),
+        },
+        */
 
+        routes:{
+          '/start':(context)=>Start(),
+          '/aboutus':(context)=>Home(),
         },
 
-        child: Icon(Icons.add),
+
+        home:MainPage(),
+
+        //home:MainPage(),
+
       ),
-    );
+
+      )
+    ;
   }
 }

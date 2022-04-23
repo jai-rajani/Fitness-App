@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:practice/services/authentication.dart';
+import 'package:practice/services/authentication.dart';
+import 'package:practice/pages/start.dart';
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({Key? key}) : super(key: key);
+  final AuthService _auth=AuthService();
+  //const AboutUs({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,37 @@ class AboutUs extends StatelessWidget {
               fontSize: 22.0,
             ),
           ),
+          actions: <Widget>[
+            TextButton(
+
+              onPressed: () async{
+                  await _auth.signout();
+                  print('signed out');
+                  //Navigator.pushNamed(context, '/home');
+
+              },
+              child: Text("Sign Out",
+                  style:TextStyle(
+                    fontSize: 17,
+                    color:Colors.white,
+                  )),
+
+            ),
+            TextButton(
+
+              onPressed: () async{
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Start()),
+                );
+
+              },
+              child: Text("Start",
+                  style:TextStyle(
+                    fontSize: 17,
+                    color:Colors.white,
+                  )),
+
+            ),
+          ],
           centerTitle: true,
           backgroundColor: Colors.grey[800],
         ),
