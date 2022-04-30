@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     //sign in button
                 Container(
                     height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: ElevatedButton(
                       // textColor: Colors.white,
                       // color: Colors.blue,
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPrimary: Colors.white,
                       ),
                       child: Text(
-                        'Login ANON',
+                        'Login Anonymously',
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                     //REGISTER BUTTON
                 Container(
                     height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: ElevatedButton(
                       // textColor: Colors.white,
                       // color: Colors.blue,
@@ -196,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                     //SIGN IN WITH EMAIL
                   Container(
                       height: 50,
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       child: ElevatedButton(
                         // textColor: Colors.white,
                         // color: Colors.blue,
