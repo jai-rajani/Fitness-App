@@ -1,0 +1,8 @@
+//start page theme
+
+Color backcolor=Color(0xff222831);
+Color boxcolor=Color(0xffEEEEEE);
+
+//date-time
+final DateFormat formatter = DateFormat('dd-MM-yyyy');
+      final String formatted = formatter.format(DateTime.now());

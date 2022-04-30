@@ -11,6 +11,7 @@ import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:practice/models/User1.dart';
 import 'package:practice/pages/wrapper.dart';
+import 'package:practice/pages/counter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

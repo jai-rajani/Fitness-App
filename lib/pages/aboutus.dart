@@ -1,18 +1,72 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:practice/pages/counter.dart';
 import 'package:practice/services/authentication.dart';
 import 'package:practice/services/authentication.dart';
 import 'package:practice/pages/start.dart';
+import 'package:practice/services/database.dart';
+import 'package:provider/provider.dart';
 
-class AboutUs extends StatelessWidget {
+import '../models/User1.dart';
+
+class AboutUs extends StatefulWidget {
+  @override
+  State<AboutUs> createState() => _AboutUsState();
+}
+
+class _AboutUsState extends State<AboutUs> {
   final AuthService _auth=AuthService();
+  bool isloading=false;
+  int checkDate=0;
+  
   //const AboutUs({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    //final String formatted = formatter.format(DateTime.now());
+    final String formatted ='5-05-2022';
+    //initalising user
+    User1? user = Provider.of<User1?>(context);
+
+    //getting collection database
+    final CollectionReference   testCollection = FirebaseFirestore.instance
+        .collection('test').doc(user!.uid).collection('nwstedTest');
+
+    //function to get data from database
+    Future<void> getData() async {
+      // Get docs from collection reference
+      QuerySnapshot querySnapshot = await testCollection.get();
+
+      // Get data from docs and convert map to List
+      final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+
+      for (int i = 0; i < allData.length; i++) {
+        Map<String, dynamic> map = allData[i] as Map<String, dynamic>;
+        if(formatted==map['date']){
+          print('present');
+          checkDate=1;
+          break;
+        }
+      }
+      if(checkDate==0){
+        print('not present');
+
+        //create database for not present date
+        await DatabaseService(uid:user!.uid).addEntry(user!.uid, formatted, 0);
+
+
+      }
+
+
+    }
+
     return Scaffold(
         backgroundColor: Colors.grey[600],
         appBar: AppBar(
+
           title: Text(
             'About Us',
             style: TextStyle(
@@ -20,6 +74,7 @@ class AboutUs extends StatelessWidget {
               fontSize: 22.0,
             ),
           ),
+
           actions: <Widget>[
             TextButton(
 
@@ -30,6 +85,22 @@ class AboutUs extends StatelessWidget {
 
               },
               child: Text("Sign Out",
+                  style:TextStyle(
+                    fontSize: 17,
+                    color:Colors.white,
+                  )),
+
+            ),
+            TextButton(
+
+              onPressed: () async{
+                getData();
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const Counter())
+                );
+
+
+              },
+              child: Text("Counter",
                   style:TextStyle(
                     fontSize: 17,
                     color:Colors.white,

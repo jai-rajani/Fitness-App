@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
     if(user!=null){
       final now = DateTime.now();
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
-      final String formatted = formatter.format(now);
+      final String formatted = formatter.format(DateTime.now());
       print(now);
       print(formatted);
     print('THis '+(user?.uid).toString());}

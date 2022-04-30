@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:practice/models/User1.dart';
+import 'package:practice/pages/loading.dart';
 import 'package:practice/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -97,6 +98,8 @@ class start_State extends State<Start> {
       stream: DatabaseService(uid: user!.uid).usersStream,
 
       builder: (context, snapshot) {
+        print(snapshot);
+
         if (snapshot.hasData) {
           UserData? usersStream = snapshot.data;
           print("WORKING");
@@ -485,7 +488,7 @@ class start_State extends State<Start> {
                             print(height);
                             print(weight);
                             await DatabaseService(uid: user.uid).updateUserData(
-                              'blank name',
+                              usersStream!.name,
                               height ,
                               weight ,
                               age,
@@ -644,9 +647,7 @@ class start_State extends State<Start> {
         }
         else{
           print(user.uid);
-          return Text(
-            'error',
-          );
+          return Loading();
         }
       }
     );

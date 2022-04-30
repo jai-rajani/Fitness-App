@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:practice/pages/loading.dart';
-import 'package:practice/pages/register.dart';
 import 'package:practice/services/authentication.dart';
-class LoginPage extends StatefulWidget {
-  const LoginPage({ Key? key }) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({ Key? key }) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool isloading=false;
   final AuthService _auth=AuthService();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String Error='';
   @override
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.all(10),
                     child: Text(
 
-                      'Login ',
+                      'Create Account ',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w500,
@@ -60,15 +60,11 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                               color:Colors.white,
                             ),
-                            controller: nameController,
+                            controller: usernameController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter some text';
                               }
-
-
-
-
                               return null;
                             },
                             decoration: InputDecoration(
@@ -79,7 +75,32 @@ class _LoginPageState extends State<LoginPage> {
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               ),
-                              labelText: 'Email ID',
+                              labelText: 'User Name',
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            style: TextStyle(
+                              color:Colors.white,
+                            ),
+                            controller: nameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              labelText: 'Email',
                             ),
                           ),
                         ),
@@ -116,50 +137,51 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
 
+                        SizedBox(height: 50,),
 
 
-                        /*
-                    //REGISTER BUTTON
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: ElevatedButton(
-                      // textColor: Colors.white,
-                      // color: Colors.blue,
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        onPrimary: Colors.white,
-                      ),
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          color: Colors.white,
+
+
+                        //REGISTER BUTTON
+                        Container(
+                            height: 50,
+                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: ElevatedButton(
+                              // textColor: Colors.white,
+                              // color: Colors.blue,
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue,
+                                  onPrimary: Colors.white,
+                                ),
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    setState(() {
+                                      isloading=true;
+                                    });
+                                    dynamic result=await _auth.registerEmail(usernameController.text,nameController.text,passwordController.text);
+                                    if(result==null){
+                                      setState(() {
+                                        Error='Enter a Valid Email Address!!';
+                                      });
+                                    }
+                                    else{
+                                      Navigator.pop(context);
+                                      print("no error");
+                                    }
+                                  }
+
+                                }
+                            )
                         ),
-                      ),
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          setState(() {
-                            isloading=true;
-                          });
-                          dynamic result=await _auth.registerEmail(nameController.text,passwordController.text);
-                        if(result==null){
-                          setState(() {
-                            Error='Enter a Valid Email Address!!';
-                          });
-                        }
-                        else{
-                          print("no error");
-                        }
-                        }
-
-                      }
-                    )
-                ),
-                */
-
+                        /*
 
                         //SIGN IN WITH EMAIL
-                        SizedBox(height: 50,),
                         Container(
                             height: 50,
                             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -193,20 +215,17 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                             )
                         ),
-                        SizedBox(height: 40,),
                         Container(
                             child: Row(
                               children: <Widget>[
                                 Text(
-                                  'Do not have an account?  ',
+                                  'Does not have account?',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage()));
-                                  },
+                                  onPressed: () {},
                                   style: TextButton.styleFrom(
                                     primary: Colors.blue,
                                   ),
@@ -219,6 +238,8 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                             )
                         ),
+
+                         */
 
                         //ERROR
                         Container(
