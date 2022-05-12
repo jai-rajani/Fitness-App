@@ -25,8 +25,8 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
-    //final String formatted = formatter.format(DateTime.now());
-    final String formatted ='5-05-2022';
+    final String formatted = formatter.format(DateTime.now());
+    //final String formatted ='5-05-2022';
     //initalising user
     User1? user = Provider.of<User1?>(context);
 
@@ -79,6 +79,22 @@ class _AboutUsState extends State<AboutUs> {
             TextButton(
 
               onPressed: () async{
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Start())
+                );
+
+
+              },
+              child: Text("Start",
+                  style:TextStyle(
+                    fontSize: 17,
+                    color:Colors.white,
+                  )),
+
+            ),
+            TextButton(
+
+              onPressed: () async{
                   await _auth.signout();
                   print('signed out');
                   //Navigator.pushNamed(context, '/home');
@@ -91,36 +107,8 @@ class _AboutUsState extends State<AboutUs> {
                   )),
 
             ),
-            TextButton(
-
-              onPressed: () async{
-                getData();
-               Navigator.push(context, MaterialPageRoute(builder: (context) => const Counter())
-                );
 
 
-              },
-              child: Text("Counter",
-                  style:TextStyle(
-                    fontSize: 17,
-                    color:Colors.white,
-                  )),
-
-            ),
-            TextButton(
-
-              onPressed: () async{
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Start()),
-                );
-
-              },
-              child: Text("Start",
-                  style:TextStyle(
-                    fontSize: 17,
-                    color:Colors.white,
-                  )),
-
-            ),
           ],
           centerTitle: true,
           backgroundColor: Colors.grey[800],

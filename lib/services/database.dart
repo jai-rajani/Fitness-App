@@ -57,8 +57,8 @@ class DatabaseService{
     );
   }
   Stream<CaloriesData> get caloriesStream{
-    //final String formatted = formatter.format(DateTime.now());
-    final String formatted ='5-05-2022';
+    final String formatted = formatter.format(DateTime.now());
+    //final String formatted ='5-05-2022';
     return testCollection.doc(uid).collection('nwstedTest').doc(formatted).snapshots()
         .map(_calorieDataFromSnapshot);
 

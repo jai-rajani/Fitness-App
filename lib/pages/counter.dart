@@ -38,8 +38,8 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) {
     User1? user=Provider.of<User1?>(context);
 
-    //final String formatted = formatter.format(now);
-    String formatted='5-05-2022';
+    final String formatted = formatter.format(now);
+    //String formatted='5-05-2022';
     Color backcolor=Color(0xff222831);
     Color boxcolor=Color(0xffEEEEEE);
 
@@ -108,6 +108,7 @@ class _CounterState extends State<Counter> {
                       Column(
                         children: [
                           Text('Calories Remaining ',
+
                               style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,

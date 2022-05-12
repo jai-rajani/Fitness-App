@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:practice/pages/about.dart';
 import 'package:practice/pages/start.dart';
-// import 'package:practice/pages/result.dart';
-// import 'package:numberpicker/numberpicker.dart';
-// import 'package:practice/pages/aboutus.dart';
-// import 'package:practice/pages/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:practice/services/authentication.dart';
 import 'firebase_options.dart';

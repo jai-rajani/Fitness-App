@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:practice/models/User1.dart';
 import 'package:practice/pages/loading.dart';
+import 'package:practice/pages/profile.dart';
+import 'package:practice/pages/counter.dart';
+import 'package:practice/pages/workout.dart';
 import 'package:practice/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -90,9 +93,6 @@ class start_State extends State<Start> {
   @override
   Widget build(BuildContext context) {
     User1? user=Provider.of<User1?>(context);
-    print('start');
-    print(user);
-    print('start');
     return StreamBuilder<UserData>(
 
       stream: DatabaseService(uid: user!.uid).usersStream,
@@ -111,10 +111,25 @@ class start_State extends State<Start> {
 
             appBar: AppBar(
 
-              title: Text('Fitness App'),
-              centerTitle: true,
+
               backgroundColor: Colors.black,
               actions: <Widget>[
+                TextButton(
+
+                  onPressed: () async{
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Counter())
+                    );
+
+
+                  },
+                  child: Text("Start",
+                      style:TextStyle(
+                        fontSize: 17,
+                        color:Colors.white,
+                      )),
+
+                ),
                 TextButton(
 
                   onPressed: () {
@@ -124,6 +139,36 @@ class start_State extends State<Start> {
                       style: TextStyle(
                         fontSize: 17,
                         color: Colors.white,
+                      )),
+
+                ),
+
+
+                TextButton(
+
+                  onPressed: () async{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Workout()));
+                  },
+                  child: Text("Workouts",
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                      )),
+
+                ),
+                TextButton(
+
+                  onPressed: () async{
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile())
+                    );
+
+
+                  },
+                  child: Text("Profile",
+                      style:TextStyle(
+                        fontSize: 17,
+                        color:Colors.white,
                       )),
 
                 ),
